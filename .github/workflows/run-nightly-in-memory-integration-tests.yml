@@ -1,4 +1,4 @@
-name: Run Nightly E2E Tests
+name: Run Nightly In-Memory Integration Tests
 
 on:
   schedule:
@@ -39,16 +39,16 @@ on:
         description: 'JSON of extra arguments for the workflow.'     
 
 jobs:
-  call-run-e2e-tests-workflow:
-    name: Run E2E Tests
+  call-nightly-run-e2e-tests-workflow:
+    name: Run Integration In-Memory Tests
     uses: smartcontractkit/.github/.github/workflows/run-e2e-tests.yml@52c57ff58abdf960d5c8367b019d43fe1c201a41
     with:
       chainlink_version: ${{ inputs.chainlink_version || 'develop' }}
-      test_path: .github/e2e-tests.yml
-      test_trigger: Nightly E2E Tests
+      test_path: .github/integration-in-memory-tests.yml
+      test_trigger: Nightly Integration CCIP Tests
       slack_notification_after_tests: ${{ inputs.slack_notification_after_tests || 'always' }}
       slack_notification_after_tests_channel_id: "#team-test-tooling-internal"
-      slack_notification_after_tests_name: Nightly E2E Tests
+      slack_notification_after_tests_name: Nightly Integration CCIP Tests
       require_chainlink_image_versions_in_qa_ecr: ${{ inputs.require_chainlink_image_versions_in_qa_ecr || '' }}
       require_chainlink_plugin_versions_in_qa_ecr: ${{ inputs.require_chainlink_plugin_versions_in_qa_ecr || '' }}
       extraArgs: ${{ inputs.extraArgs || '{"flakeguard_enable":"true","flakeguard_run_count":"5"}' }}
