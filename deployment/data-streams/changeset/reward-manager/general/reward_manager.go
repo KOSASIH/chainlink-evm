@@ -1,4 +1,4 @@
-package v0_5_0
+package general
 
 import (
 	"fmt"
@@ -7,14 +7,14 @@ import (
 
 	"github.com/smartcontractkit/chainlink/deployment"
 	"github.com/smartcontractkit/chainlink/deployment/data-streams/changeset"
-	verifier_v0_5_0 "github.com/smartcontractkit/chainlink/v2/core/gethwrappers/llo-feeds/generated/verifier_v0_5_0"
+	rewardManager "github.com/smartcontractkit/chainlink/v2/core/gethwrappers/llo-feeds/generated/reward_manager_v0_5_0"
 )
 
-func loadVerifierState(
+func loadRewardManagerState(
 	e deployment.Environment,
 	chainSel uint64,
 	contractAddr string,
-) (*verifier_v0_5_0.Verifier, error) {
+) (*rewardManager.RewardManager, error) {
 	chain, ok := e.Chains[chainSel]
 	if !ok {
 		return nil, fmt.Errorf("chain %d not found", chainSel)
@@ -31,11 +31,11 @@ func loadVerifierState(
 		return nil, err
 	}
 
-	conf, found := chainState.Verifiers[common.HexToAddress(contractAddr)]
+	conf, found := chainState.RewardManagers[common.HexToAddress(contractAddr)]
 
 	if !found {
 		return nil, fmt.Errorf(
-			"unable to find Verifier contract on chain %s (selector %d, address %s)",
+			"unable to find RewardManager contract on chain %s (selector %d, address %s)",
 			chain.Name(),
 			chain.Selector,
 			contractAddr,
