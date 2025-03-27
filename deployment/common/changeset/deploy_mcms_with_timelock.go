@@ -88,7 +88,7 @@ func DeployMCMSWithTimelockV2(
 
 type GrantRoleInput struct {
 	ExistingProposerByChain map[uint64]common.Address // if needed in the future, need to add bypasser and canceller here
-	MCMS                    *TimelockConfig
+	MCMS                    *proposalutils.TimelockConfig
 }
 
 func grantRolePreconditions(e deployment.Environment, cfg GrantRoleInput) error {
@@ -176,7 +176,7 @@ func grantRoleLogic(e deployment.Environment, cfg GrantRoleInput) (deployment.Ch
 		inspectors,
 		batches,
 		"Grant roles to timelock contracts",
-		cfg.MCMS.MinDelay,
+		*cfg.MCMS,
 	)
 	return deployment.ChangesetOutput{
 		MCMSTimelockProposals: []mcmslib.TimelockProposal{*prop},
