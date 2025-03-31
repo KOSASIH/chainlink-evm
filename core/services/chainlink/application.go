@@ -816,7 +816,11 @@ func newCREServices(
 		return nil, fmt.Errorf("could not instantiate workflow rate limiter: %w", err)
 	}
 
-	workflowLimits, err := syncerlimiter.NewWorkflowLimits(syncerlimiter.Config{
+	if len(wCfg.Limits().PerOwnerOverrides()) > 0 {
+		globalLogger.Debugw("loaded per owner overrides", "overrides", wCfg.Limits().PerOwnerOverrides())
+	}
+
+	workflowLimits, err := syncerlimiter.NewWorkflowLimits(globalLogger, syncerlimiter.Config{
 		Global:            wCfg.Limits().Global(),
 		PerOwner:          wCfg.Limits().PerOwner(),
 		PerOwnerOverrides: wCfg.Limits().PerOwnerOverrides(),
@@ -1211,7 +1215,7 @@ func (app *ChainlinkApplication) RunJobV2(
 					common.BigToHash(big.NewInt(42)).Bytes(), // seed
 					evmutils.NewHash().Bytes(),               // sender
 					evmutils.NewHash().Bytes(),               // fee
-					evmutils.NewHash().Bytes()}, // requestID
+					evmutils.NewHash().Bytes()},              // requestID
 					[]byte{}),
 				Topics:      []common.Hash{{}, jb.ExternalIDEncodeBytesToTopic()}, // jobID BYTES
 				TxHash:      evmutils.NewHash(),
