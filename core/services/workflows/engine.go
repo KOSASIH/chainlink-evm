@@ -1187,7 +1187,7 @@ func (e *Engine) Close() error {
 }
 
 func (e *Engine) HealthReport() map[string]error {
-	return map[string]error{e.Name(): nil}
+	return map[string]error{e.Name(): e.Healthy()}
 }
 
 func (e *Engine) Name() string {
