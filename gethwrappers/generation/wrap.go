@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	rootDir = "../../../contracts/solc/"
+	rootDir = "../../contracts/solc/"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 
 	// Once vrf is moved to its own subfolder we can delete this rootDir override.
 	if project == "vrf" || project == "automation" {
-		rootDir = "../../contracts/solc/"
+		rootDir = "../contracts/solc/"
 	}
 
 	abiPath := rootDir + project + "/" + className + "/" + className + ".sol/" + className + ".abi.json"

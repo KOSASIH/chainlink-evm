@@ -3,7 +3,7 @@
 package gethwrappers
 
 // Make sure solidity compiler artifacts are up-to-date. Only output stdout on failure.
-//go:generate ../../contracts/scripts/native_solc_compile_all
+//go:generate ../contracts/scripts/native_solc_compile_all
 
 //go:generate go run ./generation/generate/wrap.go OffchainAggregator/OffchainAggregator.abi - OffchainAggregator offchain_aggregator_wrapper
 //go:generate go run ./generation/generate_link/wrap_link.go

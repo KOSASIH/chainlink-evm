@@ -1,6 +1,6 @@
 package gethwrappers
 
-//go:generate go run ./generation/generate/wrap.go ../../contracts/solc/automation/KeeperRegistrar1_2/KeeperRegistrar1_2.sol/KeeperRegistrar.abi.json ../../contracts/solc/automation/KeeperRegistrar1_2/KeeperRegistrar1_2.sol/KeeperRegistrar.bin KeeperRegistrar keeper_registrar_wrapper1_2
+//go:generate go run ./generation/generate/wrap.go ../contracts/solc/automation/KeeperRegistrar1_2/KeeperRegistrar1_2.sol/KeeperRegistrar.abi.json ../contracts/solc/automation/KeeperRegistrar1_2/KeeperRegistrar1_2.sol/KeeperRegistrar.bin KeeperRegistrar keeper_registrar_wrapper1_2
 //go:generate go run ./generation/generate_automation/wrap.go KeeperRegistrar1_2Mock KeeperRegistrarMock keeper_registrar_wrapper1_2_mock
 //go:generate go run ./generation/generate_automation/wrap.go KeeperRegistry1_2 KeeperRegistry keeper_registry_wrapper1_2
 //go:generate go run ./generation/generate_automation/wrap.go KeeperRegistryCheckUpkeepGasUsageWrapper1_2Mock KeeperRegistryCheckUpkeepGasUsageWrapperMock gas_wrapper_mock
