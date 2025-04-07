@@ -3,7 +3,7 @@ package gethwrappers_test
 import (
 	"testing"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers"
+	"github.com/smartcontractkit/chainlink-evm/gethwrappers"
 
 	"github.com/stretchr/testify/assert"
 )

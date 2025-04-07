@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generation/generate/genwrapper"
+	"github.com/smartcontractkit/chainlink-evm/gethwrappers/generation/generate/genwrapper"
 )
 
 // Multiple legacy automation classes named X_{digits}, while being in X_{digits} folder,

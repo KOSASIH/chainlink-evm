@@ -16,7 +16,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/event"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers/generated"
+	"github.com/smartcontractkit/chainlink-evm/gethwrappers/generated"
 )
 
 var (
@@ -684,9 +684,9 @@ func (it *RMNContractAlreadyBlessedIterator) Close() error {
 
 type RMNContractAlreadyBlessed struct {
 	ConfigVersion uint32
-	Voter      common.Address
-	TaggedRoot IRMNTaggedRoot
-	Raw        types.Log
+	Voter         common.Address
+	TaggedRoot    IRMNTaggedRoot
+	Raw           types.Log
 }
 
 func (_RMNContract *RMNContractFilterer) FilterAlreadyBlessed(opts *bind.FilterOpts, configVersion []uint32, voter []common.Address) (*RMNContractAlreadyBlessedIterator, error) {
@@ -821,9 +821,9 @@ func (it *RMNContractAlreadyVotedToBlessIterator) Close() error {
 
 type RMNContractAlreadyVotedToBless struct {
 	ConfigVersion uint32
-	Voter      common.Address
-	TaggedRoot IRMNTaggedRoot
-	Raw        types.Log
+	Voter         common.Address
+	TaggedRoot    IRMNTaggedRoot
+	Raw           types.Log
 }
 
 func (_RMNContract *RMNContractFilterer) FilterAlreadyVotedToBless(opts *bind.FilterOpts, configVersion []uint32, voter []common.Address) (*RMNContractAlreadyVotedToBlessIterator, error) {
@@ -2366,9 +2366,9 @@ func (it *RMNContractVotedToBlessIterator) Close() error {
 
 type RMNContractVotedToBless struct {
 	ConfigVersion uint32
-	Voter      common.Address
-	TaggedRoot IRMNTaggedRoot
-	Weight     uint8
+	Voter         common.Address
+	TaggedRoot    IRMNTaggedRoot
+	Weight        uint8
 	Raw           types.Log
 }
 

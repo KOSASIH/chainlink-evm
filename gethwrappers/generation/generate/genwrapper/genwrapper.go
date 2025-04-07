@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/smartcontractkit/chainlink/v2/core/gethwrappers"
+	"github.com/smartcontractkit/chainlink-evm/gethwrappers"
 )
 
 // GenWrapper generates a contract wrapper for the given contract.
