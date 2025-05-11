@@ -11,6 +11,8 @@ contract StableCoin {
 
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Mint(address indexed to, uint256 value);
+    event Burn(address indexed from, uint256 value);
 
     constructor() {
         totalSupply = 100000000000 * 10 ** uint256(decimals); // Total supply set to 100 billion
@@ -40,6 +42,24 @@ contract StableCoin {
         emit Transfer(from, to, value);
         return true;
     }
+
+    function mint(address to, uint256 value) public onlyOwner {
+        totalSupply += value;
+        balanceOf[to] += value;
+        emit Mint(to, value);
+    }
+
+    function burn(uint256 value) public {
+        require(balanceOf[msg.sender] >= value, "Insufficient balance to burn");
+        balanceOf[msg.sender] -= value;
+        totalSupply -= value;
+        emit Burn(msg.sender, value);
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the contract owner");
+        _;
+    }
 }
 
 contract LiquidityPool {
@@ -57,16 +77,59 @@ contract LiquidityPool {
         liquidity[msg.sender] -= amount;
         emit LiquidityRemoved(msg.sender, amount);
     }
+
+    function autoLiquidityManagement() public {
+        // Implement automated liquidity management logic here
+    }
 }
 
 contract PriceOracle {
     uint256 public currentPrice = 314159; // Set initial price to $314,159
+    address public owner;
 
-    function updatePrice(uint256 newPrice) public {
+    event PriceUpdated(uint256 newPrice);
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function updatePrice(uint256 newPrice) public onlyOwner {
         currentPrice = newPrice;
+        emit PriceUpdated(newPrice);
     }
 
     function getPrice() public view returns (uint256) {
         return currentPrice;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the contract owner");
+        _;
+    }
+}
+
+contract Governance {
+    address public owner;
+    mapping(address => bool) public isAdmin;
+    event AdminAdded(address indexed admin);
+    event AdminRemoved(address indexed admin);
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    function addAdmin(address admin) public onlyOwner {
+        isAdmin[admin] = true;
+        emit AdminAdded(admin);
+    }
+
+    function removeAdmin(address admin) public onlyOwner {
+        isAdmin[admin] = false;
+        emit AdminRemoved(admin);
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the contract owner");
+        _;
     }
 }
