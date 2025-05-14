@@ -22,16 +22,7 @@ contract UltimateToken is ERC20, Ownable {
 
     // Constructor
     constructor() ERC20("UltimateToken", "ULT") {
-        _mint(msg.sender, 10000000000 * 10 ** decimals()); // Initial supply of 10 billion tokens
-        allocateInitialTokens(); // Allocate tokens to the specified address
-    }
-
-    // Function to allocate initial tokens to a specific address
-    function allocateInitialTokens() internal {
-        address initialHolder = 0x373Ec75e4e99CA59e367bA667EC38B2e14Af390B;
-        uint256 initialAmount = 1000000000 * 10 ** decimals(); // Example: Allocate 1 billion tokens
-        _mint(initialHolder, initialAmount);
-        emit Mint(initialHolder, initialAmount);
+        _mint(msg.sender, 1000000 * 10 ** decimals()); // Initial supply
     }
 
     // Modifier to check if the contract is paused
